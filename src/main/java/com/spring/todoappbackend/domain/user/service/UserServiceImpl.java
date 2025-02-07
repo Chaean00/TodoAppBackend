@@ -21,6 +21,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MessageDto signUp(SignUpRequestDto signUpRequestDto) {
+        if (userRepository.findByUid(signUpRequestDto.getUid()).isPresent()) {
+            throw new RuntimeException("이미 사용 중인 ID입니다.");
+        }
+
         try {
             String encodedPassword = passwordEncoder.encode(signUpRequestDto.getPassword());
 
@@ -32,11 +36,11 @@ public class UserServiceImpl implements UserService {
 
             return MessageDto.builder()
                     .isSuccess(true)
-                    .message("회원가입이 되었습니다.")
+                    .message("회원가입에 성공했습니다.")
                     .build();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("회원 생성 실패");
+            throw new RuntimeException("회원 생성 실패.");
         }
     }
 

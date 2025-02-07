@@ -6,6 +6,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -52,6 +55,17 @@ public class JwtUtil {
             e.printStackTrace();
             throw new JwtException("토큰 인증 과정에서 오류가 발생했습니다.");
         }
+    }
+
+    public UserDetails getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                return (UserDetails) principal;
+            }
+        }
+        return null;
     }
 
     // 토큰 정보 추출
