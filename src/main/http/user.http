@@ -3,7 +3,7 @@ POST http://localhost:8080/api/auth/signUp
 Content-Type: application/json
 
 {
-    "uid": "test3Uid",
+    "uid": "test4Uid",
     "password" : "test3Password",
     "name" : "test3Name"
 }
