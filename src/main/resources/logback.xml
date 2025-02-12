@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 기본 설정 포함 -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <!-- 로그 파일 이름과 패턴 설정 -->
+    <property name="LOG_FILE" value="logs/todoApp.log" />
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n" />
+
+    <!-- 콘솔 출력 Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 파일 출력 및 롤링 설정 Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 매일 롤링: 로그 파일 이름에 날짜를 추가 -->
+            <fileNamePattern>logs/todoApp.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 최대 보관 기간 (예: 30일) -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 루트 로거 설정: INFO 레벨 이상 로그를 CONSOLE과 FILE Appender에 출력 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

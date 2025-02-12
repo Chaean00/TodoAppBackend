@@ -3,9 +3,9 @@ POST http://localhost:8080/api/auth/signup
 Content-Type: application/json
 
 {
-    "uid": "test2",
-    "password" : "test2",
-    "name" : "test2"
+    "uid": "test3",
+    "password" : "test3",
+    "name" : "test3"
 }
 
 ### 로그인 API
