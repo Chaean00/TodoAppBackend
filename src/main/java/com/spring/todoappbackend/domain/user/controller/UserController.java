@@ -7,6 +7,7 @@ import com.spring.todoappbackend.domain.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,14 +25,14 @@ public class UserController {
 
     @Operation(summary = "회원가입", description = "새로운 사용자를 등록합니다.")
     @PostMapping("/signup")
-    public ResponseEntity<MessageDto> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
+    public ResponseEntity<MessageDto> signUp(@RequestBody @Valid SignUpRequestDto signUpRequestDto) {
 
         return ResponseEntity.ok(userService.signUp(signUpRequestDto));
     }
 
     @Operation(summary = "로그인", description = "사용자가 로그인하면 JWT 토큰을 반환합니다.")
     @PostMapping("/signin")
-    public ResponseEntity<String> signIn(@RequestBody SignInRequestDto signInRequestDto, HttpServletResponse response) {
+    public ResponseEntity<String> signIn(@RequestBody @Valid SignInRequestDto signInRequestDto, HttpServletResponse response) {
         return ResponseEntity.ok(userService.signIn(signInRequestDto, response));
     }
 

@@ -35,14 +35,12 @@ public class JwtFilter extends OncePerRequestFilter {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
                     token = cookie.getValue();
-                    log.info("Token : " + token);
                     break;
                 }
             }
         }
 
         if (token != null && jwtUtil.validationToken(token)) {
-            log.info("11");
             Long id = jwtUtil.getIdByToken(token);
             String name = jwtUtil.getNameByToken(token);
 
