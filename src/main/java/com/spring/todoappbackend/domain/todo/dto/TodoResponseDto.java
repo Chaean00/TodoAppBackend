@@ -1,18 +1,18 @@
 package com.spring.todoappbackend.domain.todo.dto;
 
+import com.spring.todoappbackend.domain.todo.enums.Category;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TodoResponseDto {
     private Long id;
     private String title;
-    private String description;
     private boolean completed;
-    private LocalDateTime createdAt;
+    private Category category;
+    private LocalDate createdAt;
 }

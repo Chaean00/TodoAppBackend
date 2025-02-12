@@ -6,6 +6,7 @@ import com.spring.todoappbackend.domain.user.dto.SignInRequestDto;
 import com.spring.todoappbackend.domain.user.dto.SignUpRequestDto;
 import com.spring.todoappbackend.domain.user.entity.User;
 import com.spring.todoappbackend.domain.user.repository.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -33,6 +34,8 @@ class UserServiceImplTest {
     private JwtUtil jwtUtil;
     @Mock
     private PasswordEncoder passwordEncoder;
+    @Mock
+    private HttpServletResponse response;
     @InjectMocks
     private UserServiceImpl userServiceImpl;
 
@@ -93,7 +96,8 @@ class UserServiceImplTest {
         when(passwordEncoder.matches("testPassword", "encryptedPassword")).thenReturn(true);
         when(jwtUtil.createToken("김정택", 1L)).thenReturn("jwt");
 
-        String token = userServiceImpl.signIn(signInRequestDto);
+        String token = userServiceImpl.signIn(signInRequestDto, response);
+
         //then
         assertNotNull(token, "token Not Null");
         assertEquals(token, "jwt");
@@ -110,7 +114,7 @@ class UserServiceImplTest {
         //when
         when(userRepository.findByUid("testUid")).thenReturn(Optional.empty());
 
-        RuntimeException e = assertThrows(RuntimeException.class, () -> userServiceImpl.signIn(signInRequestDto));
+        RuntimeException e = assertThrows(RuntimeException.class, () -> userServiceImpl.signIn(signInRequestDto, response));
         //then
 
         assertEquals("로그인에 실패했습니다.", e.getMessage());

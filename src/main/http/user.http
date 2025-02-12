@@ -1,19 +1,23 @@
 ### 회원가입 API
-POST http://localhost:8080/api/auth/signUp
+POST http://localhost:8080/api/auth/signup
 Content-Type: application/json
 
 {
-    "uid": "test3Uid",
-    "password" : "test3Password",
-    "name" : "test3Name"
+    "uid": "test2",
+    "password" : "test2",
+    "name" : "test2"
 }
 
 ### 로그인 API
-POST http://localhost:8080/api/auth/signIn
+POST http://localhost:8080/api/auth/signin
 Content-Type: application/json
 
 {
-  "uid": "test3Uid",
-  "password": "test3Password"
+  "uid": "test1",
+  "password": "test1"
 }
+
+### 로그아웃 API
+POST http://localhost:8080/api/auth/signout
+Content-Type: application/json
 

@@ -11,10 +11,17 @@ public interface TodoService {
     // 모든 Todo 조회
     List<TodoResponseDto> getAllTodos();
 
-    // 특정 Todo 조회
-    TodoResponseDto getTodoById(Long id);
+    // Todo 생성
+    TodoResponseDto createTodo(TodoRequestDto todoRequestDto);
 
-    MessageDto createTodo(TodoRequestDto todoRequestDto);
+    // Todo 수정
+    TodoResponseDto updateTodo(Long id, TodoRequestDto todoRequestDto);
 
-    MessageDto updateTodo(Long id, TodoRequestDto todoRequestDto);
+    // Todo Complete 수정
+    MessageDto updateTodo(Long id);
+
+    // Todo 삭제
+    MessageDto deleteTodo(Long id);
+
+    List<TodoResponseDto> searchTodos(String keyword);
 }

@@ -1,0 +1,34 @@
+### todo 관련 API 테스트 시 user.http의 로그인을 실행시키고 실행해야 합니다.
+
+### User의 모든 Todo 조회 API
+GET http://localhost:8080/api/todo/
+Content-Type: application/json
+
+### Todo 생성 API
+POST http://localhost:8080/api/todo/
+Content-Type: application/json
+
+{
+  "title": "할일 23",
+  "category": "HEALTH"
+}
+### Todo 수정 API
+PUT http://localhost:8080/api/todo/9
+Content-Type: application/json
+
+{
+  "title": "수정된 할일 1",
+  "category": "ETC"
+}
+
+### Todo 상태 수정 API
+PATCH http://localhost:8080/api/todo/3
+Content-Type: application/json
+
+### Todo 삭제 API
+DELETE http://localhost:8080/api/todo/4
+Content-Type: application/json
+
+### User가 등록한 Todo 검색 API
+GET http://localhost:8080/api/todos/search?keyword=Todo
+Content-Type: application/json
