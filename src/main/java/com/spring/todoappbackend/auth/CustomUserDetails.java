@@ -8,9 +8,10 @@ import java.util.Collection;
 import java.util.List;
 
 
-@Getter
+
 public class CustomUserDetails implements UserDetails {
 
+    @Getter
     private final Long id;
     private final String name;
 

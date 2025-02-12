@@ -57,17 +57,6 @@ public class JwtUtil {
         }
     }
 
-    public UserDetails getUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof UserDetails) {
-                return (UserDetails) principal;
-            }
-        }
-        return null;
-    }
-
     // 토큰 정보 추출
     private Claims getClaimsByToken(String token) {
         return Jwts.parser()
